@@ -34,14 +34,8 @@ function render() {
 
     card.addEventListener('click', () => {
       track('game_card_clicked', { game: game.id });
-      // iOS Telegram's openTelegramLink does not auto-switch Mini Apps on the
-      // same bot. openLink with try_instant_view:false routes the t.me URL out
-      // through universal-link handling, which does auto-launch the target.
-      if (tg?.openLink) {
-        tg.openLink(game.tgUrl, { try_instant_view: false });
-      } else {
-        openTelegramLink(game.tgUrl);
-      }
+      openTelegramLink(game.tgUrl);
+      tg?.close?.();
     });
     list.append(card);
   });
