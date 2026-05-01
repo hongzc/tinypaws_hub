@@ -23,4 +23,12 @@ export const GAMES = [
     tgUrl: 'https://t.me/tinypaws_games_bot/suika',
     theme: 'meadow',
   },
+  {
+    id: 'hop',
+    emoji: '🦘',
+    title: 'Hop',
+    desc: 'Charge & jump · precision combo',
+    tgUrl: 'https://t.me/tinypaws_games_bot/hop',
+    theme: 'ocean',
+  },
 ];

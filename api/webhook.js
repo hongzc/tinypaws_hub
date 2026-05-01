@@ -6,6 +6,7 @@
 const GAMES = [
   { text: '🐼 Triple Pop', url: 'https://sheep-game-tawny.vercel.app' },
   { text: '🍉 Suika', url: 'https://suika-lovat.vercel.app' },
+  { text: '🦘 Hop', url: 'https://hop-game-ten.vercel.app' },
 ];
 
 export default async function handler(req, res) {
