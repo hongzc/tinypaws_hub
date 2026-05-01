@@ -34,13 +34,10 @@ function render() {
 
     card.addEventListener('click', () => {
       track('game_card_clicked', { game: game.id });
-      // DEBUG: confirm click + show URL we're about to open
-      const proceed = () => openTelegramLink(game.tgUrl);
-      if (tg?.showConfirm) {
-        tg.showConfirm(`DEBUG: open ${game.tgUrl}?`, (ok) => { if (ok) proceed(); });
-      } else {
-        proceed();
-      }
+      openTelegramLink(game.tgUrl);
+      // iOS Telegram does not auto-switch Mini Apps on openTelegramLink alone;
+      // closing hub forces the client to surface the queued link target.
+      tg?.close?.();
     });
     list.append(card);
   });
