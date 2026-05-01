@@ -1,4 +1,4 @@
-import { tgReady, tgUser, tgPlatformInfo, openTelegramLink } from './shared/telegram.js';
+import { tg, tgReady, tgUser, tgPlatformInfo, openTelegramLink } from './shared/telegram.js';
 import { identify, track } from './shared/analytics.js';
 import { HUB_COPY, GAMES } from './strings.js';
 
@@ -34,7 +34,13 @@ function render() {
 
     card.addEventListener('click', () => {
       track('game_card_clicked', { game: game.id });
-      openTelegramLink(game.tgUrl);
+      // DEBUG: confirm click + show URL we're about to open
+      const proceed = () => openTelegramLink(game.tgUrl);
+      if (tg?.showConfirm) {
+        tg.showConfirm(`DEBUG: open ${game.tgUrl}?`, (ok) => { if (ok) proceed(); });
+      } else {
+        proceed();
+      }
     });
     list.append(card);
   });
