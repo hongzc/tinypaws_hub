@@ -9,7 +9,7 @@ export const HUB_COPY = {
 export const GAMES = [
   {
     id: 'sheep',
-    emoji: '🐑',
+    emoji: '🐼',
     title: 'Triple Pop',
     desc: 'Pop & match level challenge',
     tgUrl: 'https://t.me/tinypaws_games_bot/triple_pop',

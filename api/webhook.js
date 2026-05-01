@@ -4,7 +4,7 @@
 // taps and openTelegramLink both fail to auto-launch on the same bot.
 
 const GAMES = [
-  { text: '🐑 Triple Pop', url: 'https://sheep-game-tawny.vercel.app' },
+  { text: '🐼 Triple Pop', url: 'https://sheep-game-tawny.vercel.app' },
   { text: '🍉 Suika', url: 'https://suika-lovat.vercel.app' },
 ];
 
