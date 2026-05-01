@@ -1,9 +1,7 @@
 import { tgReady, tgUser, tgPlatformInfo, openTelegramLink } from './shared/telegram.js';
-import { registerStrings, t, getLocale, setLocale } from './shared/i18n.js';
 import { identify, track } from './shared/analytics.js';
-import { gameStrings, GAMES } from './strings.js';
+import { HUB_COPY, GAMES } from './strings.js';
 
-registerStrings(gameStrings);
 tgReady();
 
 const u = tgUser();
@@ -17,28 +15,19 @@ function render() {
   root.innerHTML = '';
   const screen = el('div', 'screen hub');
 
-  const langBtn = el('button', 'lang-btn', getLocale() === 'en' ? '中' : 'EN');
-  langBtn.setAttribute('aria-label', 'Switch language');
-  langBtn.addEventListener('click', () => {
-    setLocale(getLocale() === 'en' ? 'zh' : 'en');
-    render();
-  });
-  screen.append(langBtn);
-
-  screen.append(el('h1', 'title', t('title')));
-  screen.append(el('p', 'subtitle', t('subtitle')));
+  screen.append(el('h1', 'title', HUB_COPY.title));
+  screen.append(el('p', 'subtitle', HUB_COPY.subtitle));
 
   const list = el('div', 'game-list');
   GAMES.forEach((game, i) => {
     const card = el('button', `game-card theme-${game.theme}`);
     card.style.animationDelay = `${i * 80}ms`;
 
-    const emoji = el('div', 'game-emoji', game.emoji);
-    card.append(emoji);
+    card.append(el('div', 'game-emoji', game.emoji));
 
     const main = el('div', 'game-main');
-    main.append(el('div', 'game-title', t(game.titleKey)));
-    main.append(el('div', 'game-desc', t(game.descKey)));
+    main.append(el('div', 'game-title', game.title));
+    main.append(el('div', 'game-desc', game.desc));
     card.append(main);
 
     card.append(el('div', 'game-arrow', '›'));
@@ -51,7 +40,7 @@ function render() {
   });
   screen.append(list);
 
-  const follow = el('button', 'follow-cta', t('follow_cta'));
+  const follow = el('button', 'follow-cta', HUB_COPY.follow_cta);
   follow.addEventListener('click', () => {
     track('follow_clicked', { source: 'hub_footer' });
     openTelegramLink('https://t.me/tinypaws_games');
