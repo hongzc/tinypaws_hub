@@ -1,4 +1,4 @@
-import { tgReady, tgUser, tgPlatformInfo, openTelegramLink } from './shared/telegram.js';
+import { tg, tgReady, tgUser, tgPlatformInfo, openTelegramLink } from './shared/telegram.js';
 import { identify, track } from './shared/analytics.js';
 import { HUB_COPY, GAMES } from './strings.js';
 
@@ -35,6 +35,9 @@ function render() {
     card.addEventListener('click', () => {
       track('game_card_clicked', { game: game.id });
       openTelegramLink(game.tgUrl);
+      // openTelegramLink does not close the current Mini App; close hub so
+      // the Telegram client can hand off to the target game.
+      setTimeout(() => tg?.close?.(), 80);
     });
     list.append(card);
   });
